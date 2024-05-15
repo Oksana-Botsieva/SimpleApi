@@ -1,0 +1,14 @@
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    padding: 50px;
+    margin: 0 auto;
+    width: 1000px;
+}
+.tab-select {
+    padding: 20px;
+    display: flex;
+    column-gap: 20px;
+}
