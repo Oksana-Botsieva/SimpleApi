@@ -10,5 +10,6 @@
 .tab-select {
     padding: 20px;
     display: flex;
-    column-gap: 20px;
+    flex-direction: column;
+    gap: 20px;
 }
