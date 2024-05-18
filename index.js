@@ -1,13 +1,14 @@
-  window.addEventListener('DOMContentLoaded', () => {
-      const select = document.querySelector('#select');
-      const todoList = document.querySelector('.todo-list');
+window.addEventListener('DOMContentLoaded', () => {
+    const select = document.querySelector('#select');
+    const todoList = document.querySelector('.todo-list');
 
-  // Создаем карточку/
+     // Создаем карточку/
     const createCard = (title, text) => {
         const card = document.createElement('div');
         card.classList.add('card');
+        card.classList.add('card-body');
 
-        const cardTitle = document.createElement('h3');
+        const cardTitle = document.createElement('h5');
         cardTitle.classList.add('card-title');
         cardTitle.textContent = title;
 
@@ -21,7 +22,7 @@
         return card
         }
 
-  // Добавляем информацию о загрузке
+    // Добавляем информацию о загрузке
     const createLoadingNotification = (node) => {
         node.innerHTML = 'Loading...';
     }
@@ -31,7 +32,7 @@
         node.innerHTML = '';
         }
 
-  // Добавляем чек о завершении
+    // Добавляем чек о завершении
     const createCheckNode = () => {
         const check = document.createElement('div');
         check.classList.add('check');
@@ -42,7 +43,7 @@
         return check;
     }
 
-  // Создаем список задач
+    // Создаем список задач
 
     const createTodosList = async (limit = 10) => {
         /*Если успех,то очищаем контейнер,показываем пользователю инфу о загрузке
@@ -53,9 +54,9 @@
 
         try {
             createLoadingNotification(todoList);
-// Создаем запрос на сервер
+    // Создаем запрос на сервер
             const response = await fetch(`https://jsonplaceholder.typicode.com/todos?_limit=${limit}`);
-// Формат json
+    // Формат json
             const todos = await response.json();
 
             if (todos) {
@@ -86,4 +87,7 @@
         clearTodoFiledChildren(todoList);
         createTodosList(value);
     });
+
+    //Create post
+
     })
