@@ -88,6 +88,37 @@ window.addEventListener('DOMContentLoaded', () => {
         createTodosList(value);
     });
 
-    //Create post
+    //Create post start
+    const postForm = document.querySelector('#create-post-form');
+    const submitBtn = document.querySelector('.create-post-form-button');
 
+    postForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const formData = new FormData(postForm);
+
+        try {
+            submitBtn.disabled = true;
+            const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+            console.log(data);
+
+            if (response.ok) {
+                const successfulShipment = document.createElement('div');
+                successfulShipment.innerText = 'Sent!';
+                postForm.appendChild(successfulShipment);
+                setTimeout(() => {
+                    postForm.removeChild(successfulShipment);
+                }, 1500)
+            }
+        } catch (error) {
+            console.log(error)
+        } finally {
+            submitBtn.disabled = false;
+        }
     })
+    })
+//CREATE POST END
