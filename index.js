@@ -1,6 +1,7 @@
 window.addEventListener('DOMContentLoaded', () => {
-    const select = document.querySelector('#select');
-    const todoList = document.querySelector('.todo-list');
+      const select = document.querySelector('#select');
+      const todoList = document.querySelector('.todo-list');
+      const postList = document.querySelector('.post-list');
 
      // Создаем карточку/
     const createCard = (title, text) => {
@@ -51,7 +52,6 @@ window.addEventListener('DOMContentLoaded', () => {
     если свойство completed ' true' - добавляем чек.
     добавляем карточку в конец списка
     иначе выводим ошибку в консоль*/
-
         try {
             createLoadingNotification(todoList);
     // Создаем запрос на сервер
@@ -87,8 +87,30 @@ window.addEventListener('DOMContentLoaded', () => {
         clearTodoFiledChildren(todoList);
         createTodosList(value);
     });
+      //Posts
 
-    //Create post start
+      // Создаем запрос на сервер, преобразуем json - ответ в объект JS. Создаем условие, в котором очищаем стр от содержимого
+      // в цикле вызываем функцию по созданию карточки и добавляем в конец списка.
+      const createPostList = async () => {
+          try {
+              const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+              const posts = await response.json();
+
+              if (posts) {
+                  clearTodoFiledChildren(postList);
+                  posts.forEach((post) => {
+                      const card = createCard(post.title, post.body);
+                      postList.appendChild(card);
+                  })
+              }
+          } catch (e) {
+              console.log(e);
+          }
+      }
+
+      createPostList();
+    
+  //Create post start
     const postForm = document.querySelector('#create-post-form');
     const submitBtn = document.querySelector('.create-post-form-button');
 
@@ -122,3 +144,5 @@ window.addEventListener('DOMContentLoaded', () => {
     })
     })
 //CREATE POST END
+
+
