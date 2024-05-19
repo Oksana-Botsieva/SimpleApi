@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', () => {
-      const select = document.querySelector('#select');
-      const todoList = document.querySelector('.todo-list');
-      const postList = document.querySelector('.post-list');
+    const select = document.querySelector('#select');
+    const todoList = document.querySelector('.todo-list');
+    const postList = document.querySelector('.post-list');
 
      // Создаем карточку/
     const createCard = (title, text) => {
@@ -91,24 +91,24 @@ window.addEventListener('DOMContentLoaded', () => {
 
       // Создаем запрос на сервер, преобразуем json - ответ в объект JS. Создаем условие, в котором очищаем стр от содержимого
       // в цикле вызываем функцию по созданию карточки и добавляем в конец списка.
-      const createPostList = async () => {
-          try {
-              const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-              const posts = await response.json();
+    const createPostList = async () => {
+        try {
+            const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+            const posts = await response.json();
 
-              if (posts) {
-                  clearTodoFiledChildren(postList);
-                  posts.forEach((post) => {
-                      const card = createCard(post.title, post.body);
-                      postList.appendChild(card);
-                  })
-              }
-          } catch (e) {
-              console.log(e);
-          }
-      }
+            if (posts) {
+                clearTodoFiledChildren(postList);
+                posts.forEach((post) => {
+                const card = createCard(post.title, post.body);
+                postList.appendChild(card);
+            })
+        }
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
-      createPostList();
+    createPostList();
     
   //Create post start
     const postForm = document.querySelector('#create-post-form');
@@ -142,7 +142,48 @@ window.addEventListener('DOMContentLoaded', () => {
             submitBtn.disabled = false;
         }
     })
+    //CREATE POST END
+
+    //CREATE POST JSON start
+    const jsonForm = document.querySelector('.json-tab-pane');
+    const jsonBtn = document.querySelector('.json-post-form-button');
+    const createPostContainer = document.querySelector('.create-post');
+    jsonForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(jsonForm);
+        const formDataObject = {};
+
+        formData.forEach((value, key) => {
+            formDataObject[key] = value;
+        })
+
+        try {
+            jsonBtn.disabled = true;
+            const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                body: JSON.stringify(formDataObject)
+            });
+
+            const data = await response.json();
+            console.log(data);
+
+            if (response.ok) {
+                const card = createCard(data.title, data.body);
+                createPostContainer.appendChild(card);
+
+                const successfulShipment = document.createElement('div');
+                successfulShipment.innerText = 'Ваш созданный пост';
+
+                createPostContainer.appendChild(successfulShipment);
+            }
+        } catch (error) {
+            console.log(error);
+        } finally {
+            jsonBtn.disabled = false;
+        }
     })
-//CREATE POST END
-
-
+})

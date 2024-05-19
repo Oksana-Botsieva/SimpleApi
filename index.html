@@ -20,7 +20,7 @@
             <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Create Post</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false" disabled>Create Post JSON</button>
+            <button class="nav-link" id="json-tab" data-bs-toggle="tab" data-bs-target="#json-tab-pane" type="button" role="tab" aria-controls="json-tab-pane" aria-selected="false">Create Post JSON</button>
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">
@@ -55,7 +55,20 @@
             </form>
         </div>
 <!--        CREATE POST JSON-->
-        <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">...</div>
+        <div class="tab-pane fade" id="json-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+            <form action id="json-post-form" enctype="multipart/form-data">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Title</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" name="title" aria-describedby="inputGroup-sizing-sm">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Body</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" name="title" aria-describedby="inputGroup-sizing-sm">
+                </div>
+                <button type="submit" class="btn btn-primary json-post-form-button">Submit</button>
+            </form>
+            <div class="create-post"></div>
+        </div>
     </div>
 </div>
 <script src="./index.js"></script>
