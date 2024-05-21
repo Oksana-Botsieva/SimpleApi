@@ -145,7 +145,7 @@ window.addEventListener('DOMContentLoaded', () => {
     //CREATE POST END
 
     //CREATE POST JSON start
-    const jsonForm = document.querySelector('.json-tab-pane');
+    const jsonForm = document.querySelector('#json-post-form');
     const jsonBtn = document.querySelector('.json-post-form-button');
     const createPostContainer = document.querySelector('.create-post');
     jsonForm.addEventListener('submit', async (event) => {
